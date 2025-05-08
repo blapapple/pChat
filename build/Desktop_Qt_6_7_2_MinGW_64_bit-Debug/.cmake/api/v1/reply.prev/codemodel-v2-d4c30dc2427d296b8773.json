@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-2e8ad98521a8cfea47ab.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "pChat",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "pChat::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-pChat-Debug-719e0c9760170a1a70fb.json",
+					"name" : "pChat",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "pChat_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-pChat_autogen-Debug-676dab489e1ce6b082a5.json",
+					"name" : "pChat_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "pChat_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-pChat_autogen_timestamp_deps-Debug-935b94878e59aba2503d.json",
+					"name" : "pChat_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/code/pChat/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug",
+		"source" : "D:/code/pChat"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

@@ -1,0 +1,13 @@
+# ninja log v6
+18	1186	7683223446827755	pChat_autogen/timestamp	44c6bf9aa0bff4cb
+18	1186	7683223446827755	pChat_autogen/mocs_compilation.cpp	44c6bf9aa0bff4cb
+18	1186	7683223446827755	D:/code/pChat/build/Desktop_Qt_6_7_2_MinGW_64_bit-Release/pChat_autogen/timestamp	44c6bf9aa0bff4cb
+18	1186	7683223446827755	D:/code/pChat/build/Desktop_Qt_6_7_2_MinGW_64_bit-Release/pChat_autogen/mocs_compilation.cpp	44c6bf9aa0bff4cb
+1195	1335	7683223449544455	pChat_autogen/EWIEGA46WW/qrc_sources.cpp	4249852c7a94c954
+1195	1335	7683223449544455	D:/code/pChat/build/Desktop_Qt_6_7_2_MinGW_64_bit-Release/pChat_autogen/EWIEGA46WW/qrc_sources.cpp	4249852c7a94c954
+1366	1540	7683223449972983	CMakeFiles/pChat.dir/ico.rc.obj	eef47467969fe41
+1376	2530	7683223450080366	CMakeFiles/pChat.dir/pChat_autogen/EWIEGA46WW/qrc_sources.cpp.obj	224c26c5e5ea33a1
+1336	4234	7683223449670173	CMakeFiles/pChat.dir/pChat_autogen/mocs_compilation.cpp.obj	233ff38b5ba1d04b
+1345	4267	7683223449760498	CMakeFiles/pChat.dir/main.cpp.obj	7a12fb45e11e7ef
+1355	4317	7683223449866009	CMakeFiles/pChat.dir/mainwindow.cpp.obj	f700b43bc51d9d2a
+4317	4583	7683223479480602	pChat.exe	b78d7bb3216715fb

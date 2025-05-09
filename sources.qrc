@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>resources/icons/softwate_icon.ico</file>
+        <file>resources/images/1746674326076_temp_qrcode_share_9993.png</file>
+        <file>resources/styles/styleSheet.qss</file>
     </qresource>
 </RCC>

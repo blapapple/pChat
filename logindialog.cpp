@@ -6,6 +6,7 @@ LoginDialog::LoginDialog(QWidget *parent)
     , ui(new Ui::LoginDialog)
 {
     ui->setupUi(this);
+    connect(ui->btnReg, &QPushButton::clicked, this, &LoginDialog::SwitchRegister);
 }
 
 LoginDialog::~LoginDialog()

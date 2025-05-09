@@ -2,7 +2,14 @@
 #define LOGINDIALOG_H
 
 #include <QDialog>
-
+/*************************************************************************
+ * @file                logindialog.h
+ * @brief               登陆界面模块设计
+ *
+ * @author              pyf
+ * @date                2025/05/08
+ * @history
+ *************************************************************************/
 namespace Ui {
 class LoginDialog;
 }
@@ -17,6 +24,8 @@ public:
 
 private:
     Ui::LoginDialog *ui;
+signals:
+    void SwitchRegister();
 };
 
 #endif // LOGINDIALOG_H

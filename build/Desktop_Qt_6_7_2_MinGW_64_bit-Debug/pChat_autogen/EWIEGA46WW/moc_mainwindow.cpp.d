@@ -1,5 +1,19 @@
 D:/code/pChat/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/pChat_autogen/EWIEGA46WW/moc_mainwindow.cpp: D:/code/pChat/mainwindow.h \
   D:/code/pChat/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/pChat_autogen/moc_predefs.h \
+  D:/code/pChat/global.h \
+  D:/code/pChat/logindialog.h \
+  D:/code/pChat/registerdialog.h \
+  D:/software/QT/6.7.2/mingw_64/include/QtCore/QByteArray \
+  D:/software/QT/6.7.2/mingw_64/include/QtCore/QFlags \
+  D:/software/QT/6.7.2/mingw_64/include/QtCore/QIODevice \
+  D:/software/QT/6.7.2/mingw_64/include/QtCore/QList \
+  D:/software/QT/6.7.2/mingw_64/include/QtCore/QMetaType \
+  D:/software/QT/6.7.2/mingw_64/include/QtCore/QObject \
+  D:/software/QT/6.7.2/mingw_64/include/QtCore/QRegularExpression \
+  D:/software/QT/6.7.2/mingw_64/include/QtCore/QSharedDataPointer \
+  D:/software/QT/6.7.2/mingw_64/include/QtCore/QString \
+  D:/software/QT/6.7.2/mingw_64/include/QtCore/QUrl \
+  D:/software/QT/6.7.2/mingw_64/include/QtCore/QVariant \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/q20functional.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/q20memory.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/q20type_traits.h \
@@ -18,6 +32,7 @@ D:/code/pChat/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/pChat_autogen/EWIEGA46WW
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qbytearrayalgorithms.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qbytearraylist.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qbytearrayview.h \
+  D:/software/QT/6.7.2/mingw_64/include/QtCore/qcalendar.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qchar.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qcompare.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qcompare_impl.h \
@@ -29,8 +44,10 @@ D:/code/pChat/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/pChat_autogen/EWIEGA46WW
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qcontainerinfo.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qcontainertools_impl.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qcontiguouscache.h \
+  D:/software/QT/6.7.2/mingw_64/include/QtCore/qcryptographichash.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qdarwinhelpers.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qdatastream.h \
+  D:/software/QT/6.7.2/mingw_64/include/QtCore/qdatetime.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qdebug.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qendian.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qexceptionhandling.h \
@@ -44,12 +61,14 @@ D:/code/pChat/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/pChat_autogen/EWIEGA46WW
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qglobalstatic.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qhash.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qhashfunctions.h \
+  D:/software/QT/6.7.2/mingw_64/include/QtCore/qiodevice.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qiodevicebase.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qiterable.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qiterator.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qlatin1stringview.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qline.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qlist.h \
+  D:/software/QT/6.7.2/mingw_64/include/QtCore/qlocale.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qlogging.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qmalloc.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qmap.h \
@@ -70,6 +89,7 @@ D:/code/pChat/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/pChat_autogen/EWIEGA46WW
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qprocessordetection.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qrect.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qrefcount.h \
+  D:/software/QT/6.7.2/mingw_64/include/QtCore/qregularexpression.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qscopedpointer.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qscopeguard.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qset.h \
@@ -111,6 +131,7 @@ D:/code/pChat/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/pChat_autogen/EWIEGA46WW
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qtversionchecks.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qtypeinfo.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qtypes.h \
+  D:/software/QT/6.7.2/mingw_64/include/QtCore/qurl.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qutf8stringview.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qvariant.h \
   D:/software/QT/6.7.2/mingw_64/include/QtCore/qvarlengtharray.h \
@@ -142,9 +163,34 @@ D:/code/pChat/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/pChat_autogen/EWIEGA46WW
   D:/software/QT/6.7.2/mingw_64/include/QtGui/qtransform.h \
   D:/software/QT/6.7.2/mingw_64/include/QtGui/qwindowdefs.h \
   D:/software/QT/6.7.2/mingw_64/include/QtGui/qwindowdefs_win.h \
+  D:/software/QT/6.7.2/mingw_64/include/QtNetwork/QNetworkAccessManager \
+  D:/software/QT/6.7.2/mingw_64/include/QtNetwork/QNetworkReply \
+  D:/software/QT/6.7.2/mingw_64/include/QtNetwork/QNetworkRequest \
+  D:/software/QT/6.7.2/mingw_64/include/QtNetwork/QSslConfiguration \
+  D:/software/QT/6.7.2/mingw_64/include/QtNetwork/QSslPreSharedKeyAuthenticator \
+  D:/software/QT/6.7.2/mingw_64/include/QtNetwork/qabstractsocket.h \
+  D:/software/QT/6.7.2/mingw_64/include/QtNetwork/qhostaddress.h \
+  D:/software/QT/6.7.2/mingw_64/include/QtNetwork/qnetworkaccessmanager.h \
+  D:/software/QT/6.7.2/mingw_64/include/QtNetwork/qnetworkreply.h \
+  D:/software/QT/6.7.2/mingw_64/include/QtNetwork/qnetworkrequest.h \
+  D:/software/QT/6.7.2/mingw_64/include/QtNetwork/qssl.h \
+  D:/software/QT/6.7.2/mingw_64/include/QtNetwork/qsslcertificate.h \
+  D:/software/QT/6.7.2/mingw_64/include/QtNetwork/qsslconfiguration.h \
+  D:/software/QT/6.7.2/mingw_64/include/QtNetwork/qsslerror.h \
+  D:/software/QT/6.7.2/mingw_64/include/QtNetwork/qsslpresharedkeyauthenticator.h \
+  D:/software/QT/6.7.2/mingw_64/include/QtNetwork/qsslsocket.h \
+  D:/software/QT/6.7.2/mingw_64/include/QtNetwork/qtcpsocket.h \
+  D:/software/QT/6.7.2/mingw_64/include/QtNetwork/qtnetwork-config.h \
+  D:/software/QT/6.7.2/mingw_64/include/QtNetwork/qtnetworkexports.h \
+  D:/software/QT/6.7.2/mingw_64/include/QtNetwork/qtnetworkglobal.h \
+  D:/software/QT/6.7.2/mingw_64/include/QtWidgets/QDialog \
   D:/software/QT/6.7.2/mingw_64/include/QtWidgets/QMainWindow \
+  D:/software/QT/6.7.2/mingw_64/include/QtWidgets/QStyle \
+  D:/software/QT/6.7.2/mingw_64/include/QtWidgets/QWidget \
+  D:/software/QT/6.7.2/mingw_64/include/QtWidgets/qdialog.h \
   D:/software/QT/6.7.2/mingw_64/include/QtWidgets/qmainwindow.h \
   D:/software/QT/6.7.2/mingw_64/include/QtWidgets/qsizepolicy.h \
+  D:/software/QT/6.7.2/mingw_64/include/QtWidgets/qstyle.h \
   D:/software/QT/6.7.2/mingw_64/include/QtWidgets/qtabwidget.h \
   D:/software/QT/6.7.2/mingw_64/include/QtWidgets/qtwidgets-config.h \
   D:/software/QT/6.7.2/mingw_64/include/QtWidgets/qtwidgetsexports.h \
@@ -188,6 +234,7 @@ D:/code/pChat/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/pChat_autogen/EWIEGA46WW
   D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/hashtable_policy.h \
   D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/invoke.h \
   D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/ios_base.h \
+  D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/istream.tcc \
   D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/iterator_concepts.h \
   D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/list.tcc \
   D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/locale_classes.h \
@@ -247,6 +294,7 @@ D:/code/pChat/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/pChat_autogen/EWIEGA46WW
   D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/string_view.tcc \
   D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stringfwd.h \
   D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/uniform_int_dist.h \
+  D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/unique_lock.h \
   D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/unique_ptr.h \
   D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/unordered_map.h \
   D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/uses_allocator.h \
@@ -283,11 +331,14 @@ D:/code/pChat/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/pChat_autogen/EWIEGA46WW
   D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/initializer_list \
   D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/ios \
   D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/iosfwd \
+  D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/iostream \
+  D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/istream \
   D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/iterator \
   D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/limits \
   D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/list \
   D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/map \
   D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/memory \
+  D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/mutex \
   D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/new \
   D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/numbers \
   D:/software/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/numeric \

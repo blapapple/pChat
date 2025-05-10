@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     }
 
     QString fileName = "config.ini";
-    QString app_path = QCoreApplication::applicationFilePath();
+    QString app_path = QCoreApplication::applicationDirPath();
     QString config_path = QDir::toNativeSeparators(app_path + QDir::separator() + fileName);
     QSettings settings(config_path, QSettings::IniFormat);
     QString gate_host = settings.value("GateServer/host").toString();

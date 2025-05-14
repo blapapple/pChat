@@ -33,6 +33,8 @@ private slots:
     void on_btnVerifyCodeAcq_reg_clicked();
     void slot_reg_mod_finish(ReqId id, QString res, ErrorCodes err);
 
+    void on_btnSure_reg_clicked();
+
 private:
     Ui::RegisterDialog *ui;
     void ShowTip(QString str, regStatus status);

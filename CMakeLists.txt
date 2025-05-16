@@ -20,6 +20,7 @@ set(PROJECT_SOURCES
         ico.rc
 )
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(pChat
         MANUAL_FINALIZATION
@@ -33,7 +34,11 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         singleton.h
         httpmgr.h httpmgr.cpp
         config.ini
+        timerbtn.h timerbtn.cpp
+        clickedlabel.h clickedlabel.cpp
+        resetdialog.cpp resetdialog.h resetdialog.ui
     )
+#编译后移动config.ini
     add_custom_command(
         TARGET pChat POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy
@@ -75,6 +80,7 @@ set_target_properties(pChat PROPERTIES
 )
 
 include(GNUInstallDirs)
+
 install(TARGETS pChat
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}

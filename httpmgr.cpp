@@ -43,6 +43,10 @@ void HttpMgr::slot_http_finish(ReqId id, QString res, ErrorCodes err, Modules mo
         //通知指定模块http响应结束
         emit sig_reg_mod_finish(id, res, err);
     }
+    if(mod == Modules::RESETMOD){
+        //通知指定模块http响应结束
+        emit sig_reset_mod_finish(id, res, err);
+    }
 }
 
 

@@ -24,6 +24,9 @@
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <widget class="QStackedWidget" name="stackedWidget">
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
        <widget class="QWidget" name="page">
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
@@ -73,7 +76,7 @@
              </property>
              <property name="minimumSize">
               <size>
-               <width>0</width>
+               <width>60</width>
                <height>25</height>
               </size>
              </property>
@@ -83,8 +86,14 @@
                <height>25</height>
               </size>
              </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
              <property name="text">
               <string>用户：</string>
+             </property>
+             <property name="textFormat">
+              <enum>Qt::AutoText</enum>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -95,7 +104,7 @@
             <widget class="QLineEdit" name="editUserReg">
              <property name="minimumSize">
               <size>
-               <width>200</width>
+               <width>180</width>
                <height>25</height>
               </size>
              </property>
@@ -107,6 +116,19 @@
              </property>
             </widget>
            </item>
+           <item>
+            <spacer name="horizontalSpacer_3">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
           </layout>
          </item>
          <item>
@@ -115,7 +137,7 @@
             <widget class="QLabel" name="labelEmailReg">
              <property name="minimumSize">
               <size>
-               <width>0</width>
+               <width>60</width>
                <height>25</height>
               </size>
              </property>
@@ -134,7 +156,7 @@
             <widget class="QLineEdit" name="editEmailReg">
              <property name="minimumSize">
               <size>
-               <width>0</width>
+               <width>180</width>
                <height>25</height>
               </size>
              </property>
@@ -146,6 +168,19 @@
              </property>
             </widget>
            </item>
+           <item>
+            <spacer name="horizontalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
           </layout>
          </item>
          <item>
@@ -154,7 +189,7 @@
             <widget class="QLabel" name="labelPasswdReg">
              <property name="minimumSize">
               <size>
-               <width>0</width>
+               <width>60</width>
                <height>25</height>
               </size>
              </property>
@@ -173,17 +208,49 @@
             <widget class="QLineEdit" name="editPasswdReg">
              <property name="minimumSize">
               <size>
-               <width>0</width>
+               <width>160</width>
                <height>25</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>200</width>
+               <width>175</width>
                <height>25</height>
               </size>
              </property>
             </widget>
+           </item>
+           <item>
+            <widget class="ClickedLabel" name="labelPasswdVisible_reg">
+             <property name="minimumSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_5">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </item>
@@ -193,7 +260,7 @@
             <widget class="QLabel" name="labelPasswdConfirmReg">
              <property name="minimumSize">
               <size>
-               <width>0</width>
+               <width>60</width>
                <height>25</height>
               </size>
              </property>
@@ -212,17 +279,49 @@
             <widget class="QLineEdit" name="editPasswdConfirmReg">
              <property name="minimumSize">
               <size>
-               <width>0</width>
+               <width>160</width>
                <height>25</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>200</width>
+               <width>175</width>
                <height>25</height>
               </size>
              </property>
             </widget>
+           </item>
+           <item>
+            <widget class="ClickedLabel" name="labelPasswdConfirmVisible_reg">
+             <property name="minimumSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_6">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </item>
@@ -232,7 +331,7 @@
             <widget class="QLabel" name="labelVerifyCode_reg">
              <property name="minimumSize">
               <size>
-               <width>0</width>
+               <width>60</width>
                <height>25</height>
               </size>
              </property>
@@ -251,7 +350,7 @@
             <widget class="QLineEdit" name="editVerifyCode_reg">
              <property name="minimumSize">
               <size>
-               <width>0</width>
+               <width>100</width>
                <height>25</height>
               </size>
              </property>
@@ -264,7 +363,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="btnVerifyCodeAcq_reg">
+            <widget class="TimerBtn" name="btnVerifyCodeAcq_reg">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -273,7 +372,7 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>80</width>
                <height>35</height>
               </size>
              </property>
@@ -281,6 +380,19 @@
               <string>获取验证码</string>
              </property>
             </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_7">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </item>
@@ -354,13 +466,147 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="page_2"/>
+       <widget class="QWidget" name="page_2">
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <item>
+          <spacer name="verticalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_tip">
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>注册成功，5s 后返回登陆页面</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>可点击返回按钮直接返回登录界面</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_5">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QWidget" name="widget_2" native="true">
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <item>
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>11</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>返回登陆</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>114</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
       </widget>
      </item>
     </layout>
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TimerBtn</class>
+   <extends>QPushButton</extends>
+   <header>timerbtn.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ClickedLabel</class>
+   <extends>QLabel</extends>
+   <header>clickedlabel.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

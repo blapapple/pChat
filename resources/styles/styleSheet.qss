@@ -13,3 +13,45 @@ background-color:rgb(255,255,255)
 #labelErrorTip[state='err']{
     color: red;
 }
+
+
+#labelPasswdVisible_reg[state='unvisible']{
+   border-image: url(:/resources/images/unvisible.png);
+}
+
+#labelPasswdVisible_reg[state='unvisible_hover']{
+   border-image: url(:/resources/images/unvisible_hover.png);
+}
+
+#labelPasswdVisible_reg[state='visible']{
+   border-image: url(:/resources/images/visible.png);
+}
+
+#labelPasswdVisible_reg[state='visible_hover']{
+   border-image: url(:/resources/images/visible_hover.png);
+}
+
+
+#labelPasswdConfirmVisible_reg[state='unvisible']{
+   border-image: url(:/resources/images/unvisible.png);
+}
+
+#labelPasswdConfirmVisible_reg[state='unvisible_hover']{
+   border-image: url(:/resources/images/unvisible_hover.png);
+}
+
+#labelPasswdConfirmVisible_reg[state='visible']{
+   border-image: url(:/resources/images/visible.png);
+}
+
+#labelPasswdConfirmVisible_reg[state='visible_hover']{
+   border-image: url(:/resources/images/visible_hover.png);
+}
+
+#labelForget[state='normal'],#labelForget[state='selected']{
+    color:black;
+}
+
+#labelForget[state='hover'],#labelForget[state='selected_hover']{
+    color: rgb(42, 112, 241);
+}

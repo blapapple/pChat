@@ -11,6 +11,7 @@
 #include <QNetworkReply>
 #include <QDir>
 #include <QSettings>
+#include <QPainter>
 /**
  * @brief repolish 用来刷新qss
  */
@@ -29,6 +30,7 @@ enum ReqId{
 enum Modules{
     REGISTERMOD = 0,    //注册模块
     RESETMOD = 1,
+    LOGINMOD = 2,
 };
 
 enum ErrorCodes{
@@ -50,6 +52,14 @@ enum TipErr{
 enum ClickLbState{
     Normal = 0,
     Selected = 1
+};
+
+struct ServerInfo
+{
+    QString Host;
+    QString Port;
+    QString Token;
+    int Uid;
 };
 
 extern QString gate_url_prefix;

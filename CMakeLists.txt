@@ -37,6 +37,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         timerbtn.h timerbtn.cpp
         clickedlabel.h clickedlabel.cpp
         resetdialog.cpp resetdialog.h resetdialog.ui
+        tcpmgr.h tcpmgr.cpp
     )
 #编译后移动config.ini
     add_custom_command(

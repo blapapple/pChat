@@ -15,6 +15,9 @@ ChatDialog::ChatDialog(QWidget *parent)
     ui->setupUi(this);
     ui->add_btn->SetState("normal", "hover", "press");
     ui->search_edit->setMaxLength(30);
+    //强制消除边距
+    ui->chat_user_wd->setContentsMargins(0, 0, 0, 0);
+    ui->chat_user_wd->setStyleSheet("margin: 0px; padding: 0px; border: none;");
 
     //创建一个搜索动作和icon到line头部
     QAction *searchAction = new QAction(ui->search_edit);

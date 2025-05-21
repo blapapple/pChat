@@ -38,6 +38,15 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         clickedlabel.h clickedlabel.cpp
         resetdialog.cpp resetdialog.h resetdialog.ui
         tcpmgr.h tcpmgr.cpp
+        usermgr.h usermgr.cpp
+        chatdialog.h chatdialog.cpp chatdialog.ui
+        clickedbtn.h clickedbtn.cpp
+        customizeedit.h customizeedit.cpp
+        chatuserlist.h chatuserlist.cpp
+        chatuserwid.h chatuserwid.cpp chatuserwid.ui
+        listitembase.h listitembase.cpp
+        loadingdlg.h loadingdlg.cpp loadingdlg.ui
+        chatpage.h chatpage.cpp chatpage.ui
     )
 #编译后移动config.ini
     add_custom_command(

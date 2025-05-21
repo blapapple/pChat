@@ -51,9 +51,11 @@ void LoginDialog::slot_tcp_con_finished(bool bsuccess)
     }
 }
 
-void LoginDialog::slot_login_failed()
+void LoginDialog::slot_login_failed(int err)
 {
-
+    QString result = QString("登陆失败， err is %1").arg(err);
+    ShowTip(result, false);
+    EnableBtn(true);
 }
 
 void LoginDialog::InitHead(){

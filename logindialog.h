@@ -47,7 +47,7 @@ signals:
     void sig_connect_tcp(ServerInfo);
 private slots:
     void slot_tcp_con_finished(bool bsuccess);
-    void slot_login_failed();
+    void slot_login_failed(int err);
     void on_btnLogin_clicked();
     void slot_login_mod_finish(ReqId id, QString res, ErrorCodes err);
 };

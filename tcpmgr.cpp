@@ -2,6 +2,7 @@
 #include <QAbstractSocket>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include "usermgr.h"
 
 TcpMgr::~TcpMgr()
 {
@@ -125,6 +126,10 @@ void TcpMgr::initHandlers()
             return;
         }
 
+        UserMgr::GetInstance()->SetUid(jsonObj["uid"].toInt());
+        UserMgr::GetInstance()->SetName(jsonObj["name"].toString());
+        UserMgr::GetInstance()->SetToken(jsonObj["token"].toString());
+
         emit sig_switch_chatdlg();
 
     });
@@ -158,6 +163,7 @@ void TcpMgr::slot_send_data(ReqId reqId, QString data)
 
     //用于存储要发送的所有数据
     QByteArray block;
+    //out和block绑定，输入到out流中的数据都会到block中
     QDataStream out(&block, QIODevice::WriteOnly);
 
     //设置数据流使用网络字节序

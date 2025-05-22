@@ -148,8 +148,8 @@ LoadingDlg{
     background: #ffffff;
     border: none; /* 隐藏边框 */
     font-family: "Microsoft YaHei"; /* 设置字体 */
-    font-size: 18px; /* 设置字体大小 */
-    padding: 5px; /* 设置内边距 */
+    font-size: 14px; /* 设置字体大小 */
+    padding: 7px; /* 设置内边距 */
 }
 #send_wid{
     background: #ffffff;
@@ -221,12 +221,56 @@ LoadingDlg{
     border-image: url(:/resources/images/filedir_press.png);
 }
 
+#chat_bg{
+background: #f0f0f0;
+}
 
+#chat_data_list{
+background: #f0f0f0
+}
 
+#chat_user_name{
+    color: rgb(153, 153, 153);
+    font-size: 14px;
+    font-family: "Microsoft YaHei";
+}
 
-
-
-
+#side_chat_label[state='normal']{
+    border-image: url(:/resources/images/chat_icon.png);
+}
+#side_chat_label[state='hover']{
+    border-image: url(:/resources/images/chat_icon_hover.png);
+}
+#side_chat_label[state='pressed']{
+    border-image: url(:/resources/images/chat_icon_press.png);
+}
+#side_chat_label[state='selected_normal']{
+    border-image: url(:/resources/images/chat_icon_press.png);
+}
+#side_chat_label[state='selected_hover']{
+    border-image: url(:/resources/images/chat_icon_press.png);
+}
+#side_chat_label[state='selected_pressed']{
+    border-image: url(:/resources/images/chat_icon_press.png);
+}
+#side_contact_label[state='normal']{
+    border-image: url(:/resources/images/contact_list.png);
+}
+#side_contact_label[state='hover']{
+    border-image: url(:/resources/images/contact_list_hover.png);
+}
+#side_contact_label[state='pressed']{
+    border-image: url(:/resources/images/contact_list_press.png);
+}
+#side_contact_label[state='selected_normal']{
+    border-image: url(:/resources/images/contact_list_press.png);
+}
+#side_contact_label[state='selected_hover']{
+    border-image: url(:/resources/images/contact_list_press.png);
+}
+#side_contact_label[state='selected_pressed']{
+    border-image: url(:/resources/images/contact_list_press.png);
+}
 
 
 

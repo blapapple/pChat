@@ -77,6 +77,17 @@ enum ChatUIMode{
     ContactMode,
 };
 
+enum ChatRole{
+    Self,
+    Other
+};
+
+struct MsgInfo{
+    QString msgFlag;    //text, image, file
+    QString content;    //表示文件和图象的url, 文本信息
+    QPixmap pixmap;     //文件和图片的缩略图
+};
+
 extern QString gate_url_prefix;
 
 #endif // GLOBAL_H

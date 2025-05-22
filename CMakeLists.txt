@@ -48,6 +48,13 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         loadingdlg.h loadingdlg.cpp loadingdlg.ui
 
         chatpage.h chatpage.cpp chatpage.ui
+        chatview.h chatview.cpp
+        chatitembase.h chatitembase.cpp
+        bubbleframe.h bubbleframe.cpp
+        textbubble.h textbubble.cpp
+        picturebubble.h picturebubble.cpp
+        messagetextedit.h messagetextedit.cpp
+        statewidget.h statewidget.cpp
     )
 #编译后移动config.ini
     add_custom_command(

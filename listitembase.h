@@ -14,6 +14,8 @@ public:
 private:
     ListItemType _itemType;
 
+protected:
+    void paintEvent(QPaintEvent *event);
 public slots:
 signals:
 

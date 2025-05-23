@@ -1,17 +1,21 @@
 #ifndef TCPMGR_H
 #define TCPMGR_H
-#include <QTcpSocket>
-#include "singleton.h"
-#include "global.h"
-#include <functional>
 #include <QObject>
+#include <QTcpSocket>
+#include <functional>
 
-class TcpMgr:public QObject, public Singleton<TcpMgr>, public std::enable_shared_from_this<TcpMgr>
-{
+#include "global.h"
+#include "singleton.h"
+#include "userdata.h"
+
+class TcpMgr : public QObject,
+               public Singleton<TcpMgr>,
+               public std::enable_shared_from_this<TcpMgr> {
     Q_OBJECT
-public:
+   public:
     ~TcpMgr();
-private:
+
+   private:
     friend class Singleton<TcpMgr>;
     TcpMgr();
     void initHandlers();
@@ -23,15 +27,18 @@ private:
     bool _b_recv_pending;
     quint16 _message_id;
     quint16 _message_len;
-    QMap<ReqId, std::function<void(ReqId id, int len, QByteArray data)>> _handlers;
-public slots:
+    QMap<ReqId, std::function<void(ReqId id, int len, QByteArray data)>>
+        _handlers;
+   public slots:
     void slot_tcp_connect(ServerInfo);
     void slot_send_data(ReqId reqId, QString data);
-signals:
-    void sig_con_success(bool bsuccess);//通知其他页面登陆成功
-    void sig_send_data(ReqId reqId, QString data);//通知发送了数据，阻塞式刷新页面
+   signals:
+    void sig_con_success(bool bsuccess);  // 通知其他页面登陆成功
+    void sig_send_data(ReqId reqId,
+                       QString data);  // 通知发送了数据，阻塞式刷新页面
     void sig_switch_chatdlg();
     void sig_login_failed(int);
+    void sig_user_search(std::shared_ptr<SearchInfo>);
 };
 
-#endif // TCPMGR_H
+#endif  // TCPMGR_H

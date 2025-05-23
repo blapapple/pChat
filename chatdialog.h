@@ -20,6 +20,7 @@ class ChatDialog : public QDialog {
     explicit ChatDialog(QWidget *parent = nullptr);
     ~ChatDialog();
     void addChatUserList();
+    void ClearLabelState(StateWidget *lb);
 
    private:
     void ShowSearch(bool bsearch);
@@ -31,6 +32,9 @@ class ChatDialog : public QDialog {
     QList<StateWidget *> _lb_list;
    private slots:
     void slot_loading_chat_user();
+    void slot_side_chat();
+    void slot_side_contact();
+    void slot_text_changed(const QString &str);
 };
 
 #endif  // CHATDIALOG_H

@@ -78,10 +78,13 @@ ChatDialog::ChatDialog(QWidget *parent)
 
     AddLBGroup(ui->side_chat_label);
     AddLBGroup(ui->side_contact_label);
-    // connect(ui->side_chat_label, &StateWidget::clicked, this,
-    //         &ChatDialog::slot_side_chat);
-    // connect(ui->side_contact_label, &StateWidget::clicked, this,
-    //         &ChatDialog::slot_side_contact);
+    connect(ui->side_chat_label, &StateWidget::clicked, this,
+            &ChatDialog::slot_side_chat);
+    connect(ui->side_contact_label, &StateWidget::clicked, this,
+            &ChatDialog::slot_side_contact);
+
+    connect(ui->search_edit, &QLineEdit::textChanged, this,
+            &ChatDialog::slot_text_changed);
 }
 
 ChatDialog::~ChatDialog() { delete ui; }
@@ -125,6 +128,15 @@ void ChatDialog::addChatUserList() {
     }
 }
 
+void ChatDialog::ClearLabelState(StateWidget *lb) {
+    for (auto &ele : _lb_list) {
+        if (ele == lb) {
+            continue;
+        }
+        ele->ClearState();
+    }
+}
+
 void ChatDialog::ShowSearch(bool bsearch) {
     if (bsearch) {
         ui->chat_user_list->hide();
@@ -161,4 +173,28 @@ void ChatDialog::slot_loading_chat_user() {
     loadingDialog->deleteLater();
 
     _b_loading = false;
+}
+
+void ChatDialog::slot_side_chat() {
+    qDebug("receive side chat clicked");
+    ClearLabelState(ui->side_chat_label);
+    ui->stackedWidget->setCurrentWidget(ui->chat_page);
+    _state = ChatUIMode::ChatMode;
+    ShowSearch(false);
+}
+
+void ChatDialog::slot_side_contact() {
+    qDebug("receive side contact clicked");
+    ClearLabelState(ui->side_contact_label);
+    ui->stackedWidget->setCurrentWidget(ui->friend_apply_page);
+    _state = ChatUIMode::ContactMode;
+    ShowSearch(false);
+}
+
+void ChatDialog::slot_text_changed(const QString &str) {
+    if (!str.isEmpty()) {
+        ShowSearch(true);
+    } else {
+        ShowSearch(false);
+    }
 }

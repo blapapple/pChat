@@ -308,8 +308,52 @@ background: #f0f0f0
 #message_tip{
   text-align: center;
   font-family: "Microsoft YaHei";
-  font-size: 12pt;
+  font-size: 11pt;
 }
+
+#FindSuccessDlg{
+    background-color: #ffffff;
+}
+
+#name_label{
+    font-size: 13px;
+    font-family: "Microsoft YaHei";
+}
+
+#add_friend_btn[state = 'normal']{
+    background: #07c160;
+    color: #ffffff;
+    font-size: 13px;
+    font-family: "Microsoft YaHei";
+}
+
+#add_friend_btn[state='hover']{
+    background: #3bbb4b;
+    color: #ffffff;
+    font-size: 13px;
+    font-family: "Microsoft YaHei";
+    border-radius: 20px;
+}
+
+#add_friend_btn[state='press']{
+   background: #07c160;
+   color: #ffffff;
+   font-size: 13px;
+   font-family: "Microsoft YaHei";
+   border-radius: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

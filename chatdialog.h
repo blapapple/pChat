@@ -22,6 +22,10 @@ class ChatDialog : public QDialog {
     void addChatUserList();
     void ClearLabelState(StateWidget *lb);
 
+   protected:
+    bool eventFilter(QObject *watched, QEvent *event) override;
+    void handleGlobalMousePress(QMouseEvent *);
+
    private:
     void ShowSearch(bool bsearch);
     void AddLBGroup(StateWidget *lb);

@@ -85,6 +85,9 @@ ChatDialog::ChatDialog(QWidget *parent)
 
     connect(ui->search_edit, &QLineEdit::textChanged, this,
             &ChatDialog::slot_text_changed);
+    // 检测鼠标点击位置判断是否清空搜索框
+    this->installEventFilter(this);
+    ui->side_chat_label->SetSelected(true);
 }
 
 ChatDialog::~ChatDialog() { delete ui; }
@@ -134,6 +137,29 @@ void ChatDialog::ClearLabelState(StateWidget *lb) {
             continue;
         }
         ele->ClearState();
+    }
+}
+
+bool ChatDialog::eventFilter(QObject *watched, QEvent *event) {
+    if (event->type() == QEvent::MouseButtonPress) {
+        QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(event);
+        handleGlobalMousePress(mouseEvent);
+    }
+    return QDialog::eventFilter(watched, event);
+}
+
+void ChatDialog::handleGlobalMousePress(QMouseEvent *event) {
+    // 先判断是否处于搜索模式，如果不处于则不用管
+    if (_mode != ChatUIMode::SearchMode) {
+        return;
+    }
+
+    // 将鼠标点击位置转换为搜索列表坐标系中的位置
+    QPoint posInSearchList =
+        ui->search_list->mapFromGlobal(event->globalPosition().toPoint());
+    if (!ui->search_list->rect().contains(posInSearchList)) {
+        ui->search_list->clear();
+        ShowSearch(false);
     }
 }
 

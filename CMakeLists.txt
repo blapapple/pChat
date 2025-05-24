@@ -58,13 +58,17 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         searchlist.h searchlist.cpp
         userdata.h userdata.cpp
         adduseritem.h adduseritem.cpp adduseritem.ui
+        findsuccessdlg.h findsuccessdlg.cpp findsuccessdlg.ui
     )
-#编译后移动config.ini
+#编译后移动config.ini static
     add_custom_command(
         TARGET pChat POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy
             "${CMAKE_CURRENT_SOURCE_DIR}/config.ini"
             "$<TARGET_FILE_DIR:pChat>/config.ini"
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+            "${CMAKE_CURRENT_SOURCE_DIR}/static"
+            "$<TARGET_FILE_DIR:pChat>/static"
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET pChat APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

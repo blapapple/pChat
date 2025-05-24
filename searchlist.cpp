@@ -1,7 +1,13 @@
 #include "searchlist.h"
 
+#include <QJsonDocument>
+#include <QJsonObject>
+
 #include "adduseritem.h"
+#include "customizeedit.h"
+#include "findsuccessdlg.h"
 #include "tcpmgr.h"
+#include "userdata.h"
 
 SearchList::SearchList(QWidget *parent)
     : QListWidget(parent),
@@ -20,7 +26,12 @@ SearchList::SearchList(QWidget *parent)
             &SearchList::slot_user_search);
 }
 
-void SearchList::CloseFindDlg() {}
+void SearchList::CloseFindDlg() {
+    if (_find_dlg) {
+        _find_dlg->hide();
+        _find_dlg = nullptr;
+    }
+}
 
 void SearchList::SetSearchEdit(QWidget *edit) {}
 
@@ -70,6 +81,49 @@ void SearchList::addTipItem() {
     this->setItemWidget(item, add_user_item);
 }
 
-void SearchList::slot_item_clicked(QListWidgetItem *item) {}
+void SearchList::slot_item_clicked(QListWidgetItem *item) {
+    QWidget *widget = this->itemWidget(item);
+    if (!widget) {
+        qDebug("slot item clicked widget is nullptr");
+        return;
+    }
+    ListItemBase *customItem = qobject_cast<ListItemBase *>(widget);
+    if (!customItem) {
+        qDebug("slot item clicked widget is nullptr");
+        return;
+    }
+
+    auto itemType = customItem->GetItemType();
+    if (itemType == ListItemType::INVALID_item) {
+        qDebug("slot invalid item clicked ");
+        return;
+    }
+
+    if (itemType == ListItemType::ADD_USER_TIP_ITEM) {
+        _find_dlg = std::make_shared<FindSuccessDlg>(this);
+        auto si = std::make_shared<SearchInfo>(0, "pyf", "pyf", "hey man", 0);
+        //_find_dlg是QDialog类的，需要进行动态显式转换
+        std::dynamic_pointer_cast<FindSuccessDlg>(_find_dlg)->SetSearchInfo(si);
+        qDebug("slot ADD_USER_TIP_ITEM clicked ");
+        _find_dlg->show();
+        return;
+
+        // todo
+        if (_send_pending) {
+            return;
+        }
+        waitPending(true);
+        auto search_edit = dynamic_cast<CustomizeEdit *>(_search_edit);
+        auto uid_str = search_edit->text();
+        // 发请求给server
+        QJsonObject jsonObj;
+        jsonObj["uid"] = uid_str;
+
+        QJsonDocument doc(jsonObj);
+        QString jsonString = doc.toJson(QJsonDocument::Indented);
+    }
+    // 清除弹出框
+    CloseFindDlg();
+}
 
 void SearchList::slot_user_search(std::shared_ptr<SearchInfo> si) {}

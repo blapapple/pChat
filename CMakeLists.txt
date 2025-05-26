@@ -59,6 +59,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         userdata.h userdata.cpp
         adduseritem.h adduseritem.cpp adduseritem.ui
         findsuccessdlg.h findsuccessdlg.cpp findsuccessdlg.ui
+        applyfriend.h applyfriend.cpp applyfriend.ui
+        clickedoncelabel.h clickedoncelabel.cpp
+        friendlabel.h friendlabel.cpp friendlabel.ui
     )
 #编译后移动config.ini static
     add_custom_command(

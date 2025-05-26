@@ -1,22 +1,25 @@
 #ifndef CLICKEDLABEL_H
 #define CLICKEDLABEL_H
 #include <QLabel>
+
 #include "global.h"
 
-class ClickedLabel : public QLabel
-{
+class ClickedLabel : public QLabel {
     Q_OBJECT
-public:
+   public:
     ClickedLabel(QWidget *parent = nullptr);
     virtual void mousePressEvent(QMouseEvent *event) override;
     virtual void enterEvent(QEnterEvent *event) override;
-    virtual void mouseReleaseEvent(QMouseEvent *event)override;
+    virtual void mouseReleaseEvent(QMouseEvent *event) override;
     virtual void leaveEvent(QEvent *event) override;
     void SetState(QString normal = "", QString hover = "", QString press = "",
-                  QString select = "", QString select_hover = "", QString select_press = "");
+                  QString select = "", QString select_hover = "",
+                  QString select_press = "");
+    bool SetCurState(ClickLbState state);
     ClickLbState GetCurrentState();
+    void ResetNormalState();
 
-private:
+   private:
     QString _normal;
     QString _normal_hover;
     QString _normal_press;
@@ -26,9 +29,8 @@ private:
     QString _selected_press;
 
     ClickLbState _curstate;
-signals:
-    void clicked(void);
-
+   signals:
+    void clicked(QString, ClickLbState);
 };
 
-#endif // CLICKEDLABEL_H
+#endif  // CLICKEDLABEL_H

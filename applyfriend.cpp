@@ -65,8 +65,9 @@ void ApplyFriend::InitTipLbs() {
                      "selected_hover", "selected_pressed");
         lb->setObjectName("tipslb");
         lb->setText(_tip_data[i]);
-        // connect(lb, &ClickedLabel::clicked, this,
-        //         &ApplyFriend::slot_change_friend_label_by_tip); //参数不够
+        lb->setContentsMargins({4, 1, 4, 1});
+        connect(lb, &ClickedLabel::clicked, this,
+                &ApplyFriend::slot_change_friend_label_by_tip);
         QFontMetrics fontMetrics(lb->font());  // 获取QLabel控件的字体信息
         int textWidth =
             fontMetrics.horizontalAdvance(lb->text());  // 获取文本的宽度
@@ -92,6 +93,7 @@ void ApplyFriend::AddTipLbs(ClickedLabel* lb, QPoint cur_point,
                             int text_height) {
     lb->move(cur_point);
     lb->show();
+    lb->setContentsMargins({4, 1, 4, 1});
     _add_labels.insert(lb->text(), lb);
     _add_label_keys.push_back(lb->text());
     next_point.setX(lb->pos().x() + text_width + 15);
@@ -118,7 +120,7 @@ void ApplyFriend::SetSearchInfo(std::shared_ptr<SearchInfo> si) {
 void ApplyFriend::ShowMoreLabel() {
     qDebug() << "receive more label clicked";
     ui->more_lb_wid->hide();
-    ui->lb_list->setFixedWidth(325);
+    ui->lb_list->setFixedWidth(300);
     _tip_cur_point = QPoint(5, 5);
     auto next_point = _tip_cur_point;
     int textWidth;
@@ -208,6 +210,7 @@ void ApplyFriend::addLabel(QString name) {
     auto tmplabel = new FriendLabel(ui->grid_widget);
     tmplabel->SetText(name);
     tmplabel->setObjectName("FriendLabel");
+    tmplabel->setContentsMargins({4, 1, 4, 1});
     auto max_width = ui->grid_widget->width();
     // todo... 添加宽度统计
     if (_label_point.x() + tmplabel->width() > max_width) {

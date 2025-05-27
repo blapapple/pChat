@@ -59,6 +59,8 @@ enum ListItemType {
     ADD_USER_TIP_ITEM,  // 提示添加用户
     INVALID_item,       // 不可点击条目
     GROUP_TIP_ITEM,     // 分组提示条目
+    APPLY_FRIEND_ITEM,  // 申请好友条目
+    INVALID_ITEM,       // 无效条目
 };
 
 struct ServerInfo {
@@ -87,5 +89,12 @@ extern QString gate_url_prefix;
 const int MIN_APPLY_LABEL_ED_LEN = 40;
 const QString add_prefix = "添加标签 ";
 const int tip_offset = 5;
+
+// 作测试用数据
+
+extern std::vector<QString> strs;
+
+extern std::vector<QString> heads;
+extern std::vector<QString> names;
 
 #endif  // GLOBAL_H

@@ -51,13 +51,13 @@ void ClickedLabel::enterEvent(QEnterEvent *event) {
 void ClickedLabel::mouseReleaseEvent(QMouseEvent *event) {
     if (event->button() == Qt::LeftButton) {
         if (_curstate == ClickLbState::Normal) {
-            _curstate = ClickLbState::Selected;
+            // _curstate = ClickLbState::Selected;
             setProperty("state", _normal_hover);
             repolish(this);
             update();
 
         } else {
-            _curstate = ClickLbState::Normal;
+            // _curstate = ClickLbState::Normal;
             setProperty("state", _selected_hover);
             repolish(this);
             update();

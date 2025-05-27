@@ -92,27 +92,6 @@ ChatDialog::ChatDialog(QWidget *parent)
 
 ChatDialog::~ChatDialog() { delete ui; }
 
-// 作测试用数据
-
-std::vector<QString> strs = {
-    "hello world !",
-    "nihao",
-    "你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好",
-    "manba out",
-    "what can i say",
-    "KFC YES!",
-    "AMD YES!",
-    "tell me why?"};
-
-std::vector<QString> heads = {
-    ":/resources/images/head_1.jpg", ":/resources/images/head_2.jpg",
-    ":/resources/images/head_3.jpg", ":/resources/images/head_4.jpg",
-    ":/resources/images/head_5.jpg",
-};
-
-std::vector<QString> names = {"pyf", "lys", "gch",    "lqf",
-                              "kyx", "lyy", "潘金金", "潘银银"};
-
 void ChatDialog::addChatUserList() {
     // 创建item
     for (int i = 0; i < 25; i++) {

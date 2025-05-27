@@ -2,10 +2,11 @@
 
 #include <QDir>
 
+#include "applyfriend.h"
 #include "ui_findsuccessdlg.h"
 
 FindSuccessDlg::FindSuccessDlg(QWidget *parent)
-    : QDialog(parent), ui(new Ui::FindSuccessDlg) {
+    : QDialog(parent), ui(new Ui::FindSuccessDlg), _parent(parent) {
     ui->setupUi(this);
     // 隐藏对话框标题栏
     setWindowTitle("添加");
@@ -31,5 +32,9 @@ void FindSuccessDlg::SetSearchInfo(std::shared_ptr<SearchInfo> si) {
 }
 
 void FindSuccessDlg::on_add_friend_btn_clicked() {
-    // todo 添加好友界面弹出
+    this->hide();
+    auto applyFriend = new ApplyFriend(_parent);
+    applyFriend->SetSearchInfo(_si);
+    applyFriend->setModal(true);
+    applyFriend->show();
 }

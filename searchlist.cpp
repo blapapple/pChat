@@ -5,6 +5,7 @@
 
 #include "adduseritem.h"
 #include "customizeedit.h"
+#include "findfaildlg.h"
 #include "findsuccessdlg.h"
 #include "tcpmgr.h"
 #include "userdata.h"
@@ -33,7 +34,7 @@ void SearchList::CloseFindDlg() {
     }
 }
 
-void SearchList::SetSearchEdit(QWidget *edit) {}
+void SearchList::SetSearchEdit(QWidget *edit) { _search_edit = edit; }
 
 bool SearchList::eventFilter(QObject *watched, QEvent *event) {
     // 检查事件是否是鼠标悬浮进入或离开
@@ -62,16 +63,27 @@ bool SearchList::eventFilter(QObject *watched, QEvent *event) {
     return QListWidget::eventFilter(watched, event);
 }
 
-void SearchList::waitPending(bool pending) {}
+void SearchList::waitPending(bool pending) {
+    if (pending) {
+        _loadingDialog = new LoadingDlg(this);
+        _loadingDialog->setModal(true);
+        _loadingDialog->show();
+        _send_pending = pending;
+    } else {
+        _loadingDialog->hide();
+        _loadingDialog->deleteLater();
+        _send_pending = pending;
+    }
+}
 
 void SearchList::addTipItem() {
-    auto *invalid_item = new QWidget();
+    auto *INVALID_ITEM = new QWidget();
     QListWidgetItem *item_tmp = new QListWidgetItem;
     // qDebug()<<"chat_user_wid sizeHint is " << chat_user_wid->sizeHint();
     item_tmp->setSizeHint(QSize(250, 10));
     this->addItem(item_tmp);
-    invalid_item->setObjectName("invalid_item");
-    this->setItemWidget(item_tmp, invalid_item);
+    INVALID_ITEM->setObjectName("INVALID_ITEM");
+    this->setItemWidget(item_tmp, INVALID_ITEM);
     item_tmp->setFlags(item_tmp->flags() & ~Qt::ItemIsSelectable);
     auto *add_user_item = new AddUserItem();
     QListWidgetItem *item = new QListWidgetItem;
@@ -94,22 +106,16 @@ void SearchList::slot_item_clicked(QListWidgetItem *item) {
     }
 
     auto itemType = customItem->GetItemType();
-    if (itemType == ListItemType::INVALID_item) {
+    if (itemType == ListItemType::INVALID_ITEM) {
         qDebug("slot invalid item clicked ");
         return;
     }
 
     if (itemType == ListItemType::ADD_USER_TIP_ITEM) {
-        _find_dlg = std::make_shared<FindSuccessDlg>(this);
-        auto si = std::make_shared<SearchInfo>(0, "pyf", "pyf", "hey man", 0);
-        //_find_dlg是QDialog类的，需要进行动态显式转换
-        std::dynamic_pointer_cast<FindSuccessDlg>(_find_dlg)->SetSearchInfo(si);
-        qDebug("slot ADD_USER_TIP_ITEM clicked ");
-        _find_dlg->show();
-        return;
-
-        // todo
         if (_send_pending) {
+            return;
+        }
+        if (_search_edit == nullptr) {
             return;
         }
         waitPending(true);
@@ -120,10 +126,33 @@ void SearchList::slot_item_clicked(QListWidgetItem *item) {
         jsonObj["uid"] = uid_str;
 
         QJsonDocument doc(jsonObj);
-        QString jsonString = doc.toJson(QJsonDocument::Indented);
+        QByteArray jsonData = doc.toJson(QJsonDocument::Indented);
+        emit TcpMgr::GetInstance()->sig_send_data(ReqId::ID_SEARCH_USER_REQ,
+                                                  jsonData);
+
+        // _find_dlg = std::make_shared<FindSuccessDlg>(this);
+        // auto si =
+        //     std::make_shared<SearchInfo>(0, "pyf", "pyf", "hey man", 0, "");
+        // //_find_dlg是QDialog类的，需要进行动态显式转换
+        // std::dynamic_pointer_cast<FindSuccessDlg>(_find_dlg)->SetSearchInfo(si);
+        // qDebug("slot ADD_USER_TIP_ITEM clicked ");
+        // _find_dlg->show();
+        return;
     }
     // 清除弹出框
     CloseFindDlg();
 }
 
-void SearchList::slot_user_search(std::shared_ptr<SearchInfo> si) {}
+void SearchList::slot_user_search(std::shared_ptr<SearchInfo> si) {
+    waitPending(false);
+    if (si == nullptr) {
+        _find_dlg = std::make_shared<FindFailDlg>(this);
+    } else {
+        // todo
+        // 搜到已经是好友，或者未添加好友
+        _find_dlg = std::make_shared<FindSuccessDlg>(this);
+        std::dynamic_pointer_cast<FindSuccessDlg>(_find_dlg)->SetSearchInfo(si);
+    }
+
+    _find_dlg->show();
+}

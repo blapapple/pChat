@@ -69,6 +69,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         applyfriendpage.h applyfriendpage.cpp applyfriendpage.ui
         applyfrienditem.h applyfrienditem.cpp applyfrienditem.ui
         applyfriendlist.h applyfriendlist.cpp
+        findfaildlg.h findfaildlg.cpp findfaildlg.ui
     )
 #编译后移动config.ini static
     add_custom_command(
@@ -80,6 +81,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
             "${CMAKE_CURRENT_SOURCE_DIR}/static"
             "$<TARGET_FILE_DIR:pChat>/static"
     )
+
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET pChat APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)

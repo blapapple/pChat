@@ -31,11 +31,11 @@ class TcpMgr : public QObject,
         _handlers;
    public slots:
     void slot_tcp_connect(ServerInfo);
-    void slot_send_data(ReqId reqId, QString data);
+    void slot_send_data(ReqId reqId, QByteArray data);
    signals:
     void sig_con_success(bool bsuccess);  // 通知其他页面登陆成功
     void sig_send_data(ReqId reqId,
-                       QString data);  // 通知发送了数据，阻塞式刷新页面
+                       QByteArray data);  // 通知发送了数据，阻塞式刷新页面
     void sig_switch_chatdlg();
     void sig_login_failed(int);
     void sig_user_search(std::shared_ptr<SearchInfo>);

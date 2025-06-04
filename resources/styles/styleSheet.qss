@@ -294,7 +294,7 @@ background: #f0f0f0
     border: none;
     outline: none;
 }
-#invalid_item {
+#INVALID_ITEM {
     background-color: #eaeaea;
     border: none;
 }

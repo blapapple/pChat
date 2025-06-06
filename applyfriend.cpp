@@ -1,7 +1,10 @@
 #include "applyfriend.h"
 
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QScrollBar>
 
+#include "tcpmgr.h"
 #include "ui_applyfriend.h"
 #include "usermgr.h"
 
@@ -407,6 +410,29 @@ void ApplyFriend::slot_apply_cancel() {
 }
 void ApplyFriend::slot_apply_sure() {
     qDebug() << "Slot Apply Sure called";
+    QJsonObject jsonObj;
+    auto uid = UserMgr::GetInstance()->GetUid();
+    jsonObj["uid"] = uid;
+    auto name = ui->name_ed->text();
+    if (name.isEmpty()) {
+        name = ui->name_ed->placeholderText();  // 使用占位符文本
+    }
+
+    jsonObj["applyname"] = name;
+    auto bakname = ui->back_ed->text();
+    if (bakname.isEmpty()) {
+        bakname = ui->back_ed->placeholderText();  // 使用占位符文本
+    }
+
+    jsonObj["bakname"] = bakname;
+    jsonObj["touid"] = _si->_uid;  // 接收方的UID
+
+    QJsonDocument doc(jsonObj);
+    QByteArray jsonData = doc.toJson(QJsonDocument::Compact);
+
+    // 发送tcp请求给chat server
+    emit TcpMgr::GetInstance()->sig_send_data(ReqId::ID_ADD_FRIEND_REQ,
+                                              jsonData);
     this->hide();
     deleteLater();
 }

@@ -104,6 +104,50 @@ TcpMgr::TcpMgr()
 }
 
 void TcpMgr::initHandlers() {
+    using JsonHandler = std::function<void(const QJsonObject&, ReqId)>;
+
+    auto MakeJsonHandler = [this](JsonHandler handler,
+                                  std::function<void(int)> errSignal) {
+        return [this, handler, errSignal](ReqId id, int len, QByteArray data) {
+            Q_UNUSED(len);
+            qDebug() << "[Handler] ReqId:" << id << "Raw data:" << data;
+
+            // JSON 解析
+            QJsonParseError parseError;
+            QJsonDocument jsonDoc = QJsonDocument::fromJson(data, &parseError);
+            if (jsonDoc.isNull()) {
+                qDebug() << "JSON parse error:" << parseError.errorString();
+                errSignal(ErrorCodes::ERR_JSON);
+                return;
+            }
+
+            // 错误字段检查
+            QJsonObject jsonObj = jsonDoc.object();
+            if (!jsonObj.contains("error")) {
+                qDebug() << "Missing 'error' field in response";
+                errSignal(ErrorCodes::ERR_JSON);
+                return;
+            }
+
+            // 业务错误码处理
+            int err = jsonObj["error"].toInt();
+            if (err != ErrorCodes::SUCCESS) {
+                qDebug() << "Business error:" << err;
+                errSignal(err);  // 透传业务错误码
+                return;
+            }
+
+            // 执行业务逻辑
+            // QString errMsg;
+            // if (!handler(jsonObj, id, errMsg)) {
+            //     qDebug() << "Handler failed:" << (errMsg.isEmpty() ? "unknown
+            //     error" : errMsg); errSignal(ErrorCodes::SUCCESS);
+            // }
+            handler(jsonObj, id);
+        };
+    };
+
+    // 后期可以封装一个基类将基础操作塞进去
     _handlers.insert(
         ID_CHAT_LOGIN_RSP, [this](ReqId id, int len, QByteArray data) {
             Q_UNUSED(len);
@@ -140,8 +184,47 @@ void TcpMgr::initHandlers() {
             emit sig_switch_chatdlg();
         });
 
+    _handlers.insert(ID_SEARCH_USER_RSP, [this](ReqId id, int len,
+                                                QByteArray data) {
+        Q_UNUSED(len);
+        qDebug() << "handle id is " << id << "data is" << data;
+
+        // 转换成json
+        QJsonDocument jsonDoc = QJsonDocument::fromJson(data);
+
+        if (jsonDoc.isNull()) {
+            qDebug() << "Failed to create QJsonDocument.";
+            return;
+        }
+
+        QJsonObject jsonObj = jsonDoc.object();
+
+        if (!jsonObj.contains("error")) {
+            int err = ErrorCodes::ERR_JSON;
+            qDebug() << "Search user failed, err is Json parse err: " << err;
+            emit sig_user_search(nullptr);
+            return;
+        }
+
+        int err = jsonObj["error"].toInt();
+        if (err != ErrorCodes::SUCCESS) {
+            qDebug() << "Search user failed, err is: " << err;
+            emit sig_user_search(nullptr);
+            return;
+        }
+
+        auto search_info = std::make_shared<SearchInfo>(
+            jsonObj["uid"].toInt(), jsonObj["name"].toString(),
+            jsonObj["nick"].toString(), jsonObj["desc"].toString(),
+            jsonObj["sex"].toInt(), jsonObj["icon"].toString());
+        qDebug() << "Search user success, uid is " << search_info->_uid
+                 << ", name is " << search_info->_name;
+
+        emit sig_user_search(search_info);
+    });
+
     _handlers.insert(
-        ID_SEARCH_USER_RSP, [this](ReqId id, int len, QByteArray data) {
+        ID_ADD_FRIEND_RSP, [this](ReqId id, int len, QByteArray data) {
             Q_UNUSED(len);
             qDebug() << "handle id is " << id << "data is" << data;
 
@@ -157,27 +240,39 @@ void TcpMgr::initHandlers() {
 
             if (!jsonObj.contains("error")) {
                 int err = ErrorCodes::ERR_JSON;
-                qDebug() << "Login failed, err is Json parse err: " << err;
-                emit sig_login_failed(err);
+                qDebug() << "Add friend failed, err is Json parse err: " << err;
                 return;
             }
 
             int err = jsonObj["error"].toInt();
             if (err != ErrorCodes::SUCCESS) {
-                qDebug() << "Login failed, err is: " << err;
-                emit sig_login_failed(err);
+                qDebug() << "Add friend failed, err is: " << err;
                 return;
             }
 
-            auto search_info = std::make_shared<SearchInfo>(
-                jsonObj["uid"].toInt(), jsonObj["name"].toString(),
-                jsonObj["nick"].toString(), jsonObj["desc"].toString(),
-                jsonObj["sex"].toInt(), jsonObj["icon"].toString());
-            qDebug() << "Search user success, uid is " << search_info->_uid
-                     << ", name is " << search_info->_name;
-
-            emit sig_user_search(search_info);
+            qDebug() << "Add Friend RSP Success ";
         });
+
+    _handlers.insert(ID_NOTIFY_ADD_FRIEND_REQ,
+                     MakeJsonHandler(
+                         [this](const QJsonObject& jsonObj, ReqId id) {
+                             int from_uid = jsonObj["applyuid"].toInt();
+                             QString name = jsonObj["name"].toString();
+                             QString nick = jsonObj["nick"].toString();
+                             QString desc = jsonObj["icon"].toString();
+                             QString icon = jsonObj["icon"].toString();
+                             int sex = jsonObj["sex"].toInt();
+
+                             auto apply_info = std::make_shared<AddFriendApply>(
+                                 from_uid, name, desc, icon, nick, sex);
+                             emit sig_friend_apply(apply_info);
+
+                             qDebug() << "ID_NOTIFY_ADD_FRIEND_REQ Success ";
+                         },
+                         [this](int err) {
+                             qDebug()
+                                 << "ID_NOTIFY_ADD_FRIEND_REQ Error: " << err;
+                         }));
 }
 
 void TcpMgr::handleMsg(ReqId id, int len, QByteArray data) {

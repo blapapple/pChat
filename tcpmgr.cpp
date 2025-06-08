@@ -1,6 +1,7 @@
 #include "tcpmgr.h"
 
 #include <QAbstractSocket>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 
@@ -104,6 +105,7 @@ TcpMgr::TcpMgr()
 }
 
 void TcpMgr::initHandlers() {
+    // 每个handler需要处理json，统一处理逻辑
     using JsonHandler = std::function<void(const QJsonObject&, ReqId)>;
 
     auto MakeJsonHandler = [this](JsonHandler handler,
@@ -147,42 +149,52 @@ void TcpMgr::initHandlers() {
         };
     };
 
-    // 后期可以封装一个基类将基础操作塞进去
-    _handlers.insert(
-        ID_CHAT_LOGIN_RSP, [this](ReqId id, int len, QByteArray data) {
-            Q_UNUSED(len);
-            qDebug() << "handle id is " << id << "data is" << data;
+    _handlers.insert(ID_CHAT_LOGIN_RSP, [this](ReqId id, int len,
+                                               QByteArray data) {
+        Q_UNUSED(len);
+        qDebug() << "handle id is " << id << "data is" << data;
 
-            // 转换成json
-            QJsonDocument jsonDoc = QJsonDocument::fromJson(data);
+        // 转换成json
+        QJsonDocument jsonDoc = QJsonDocument::fromJson(data);
 
-            if (jsonDoc.isNull()) {
-                qDebug() << "Failed to create QJsonDocument.";
-                return;
-            }
+        if (jsonDoc.isNull()) {
+            qDebug() << "Failed to create QJsonDocument.";
+            return;
+        }
 
-            QJsonObject jsonObj = jsonDoc.object();
+        QJsonObject jsonObj = jsonDoc.object();
 
-            if (!jsonObj.contains("error")) {
-                int err = ErrorCodes::ERR_JSON;
-                qDebug() << "Login failed, err is Json parse err: " << err;
-                emit sig_login_failed(err);
-                return;
-            }
+        if (!jsonObj.contains("error")) {
+            int err = ErrorCodes::ERR_JSON;
+            qDebug() << "Login failed, err is Json parse err: " << err;
+            emit sig_login_failed(err);
+            return;
+        }
 
-            int err = jsonObj["error"].toInt();
-            if (err != ErrorCodes::SUCCESS) {
-                qDebug() << "Login failed, err is: " << err;
-                emit sig_login_failed(err);
-                return;
-            }
+        int err = jsonObj["error"].toInt();
+        if (err != ErrorCodes::SUCCESS) {
+            qDebug() << "Login failed, err is: " << err;
+            emit sig_login_failed(err);
+            return;
+        }
 
-            UserMgr::GetInstance()->SetUid(jsonObj["uid"].toInt());
-            UserMgr::GetInstance()->SetName(jsonObj["name"].toString());
-            UserMgr::GetInstance()->SetToken(jsonObj["token"].toString());
+        auto nick = jsonObj["nick"].toString();
+        auto icon = jsonObj["icon"].toString();
+        auto uid = jsonObj["uid"].toInt();
+        auto name = jsonObj["name"].toString();
+        auto sex = jsonObj["sex"].toInt();
 
-            emit sig_switch_chatdlg();
-        });
+        auto user_info = std::make_shared<UserInfo>(uid, name, nick, icon, sex);
+        UserMgr::GetInstance()->SetUserInfo(user_info);
+        UserMgr::GetInstance()->SetToken(jsonObj["token"].toString());
+
+        if (jsonObj.contains("apply_list")) {
+            UserMgr::GetInstance()->AppendApplyList(
+                jsonObj["apply_list"].toArray());
+        }
+
+        emit sig_switch_chatdlg();
+    });
 
     _handlers.insert(ID_SEARCH_USER_RSP, [this](ReqId id, int len,
                                                 QByteArray data) {

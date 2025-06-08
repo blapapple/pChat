@@ -70,6 +70,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         applyfrienditem.h applyfrienditem.cpp applyfrienditem.ui
         applyfriendlist.h applyfriendlist.cpp
         findfaildlg.h findfaildlg.cpp findfaildlg.ui
+        authenfriend.h authenfriend.cpp authenfriend.ui
     )
 #编译后移动config.ini static
     add_custom_command(

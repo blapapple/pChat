@@ -6,7 +6,9 @@
 #include "chatuserwid.h"
 #include "listitembase.h"
 #include "loadingdlg.h"
+#include "tcpmgr.h"
 #include "ui_chatdialog.h"
+#include "usermgr.h"
 
 ChatDialog::ChatDialog(QWidget *parent)
     : QDialog(parent),
@@ -91,6 +93,10 @@ ChatDialog::ChatDialog(QWidget *parent)
 
     // 为searchlist设置searchedit
     ui->search_list->SetSearchEdit(ui->search_edit);
+
+    //  连接申请添加好友信号
+    connect(TcpMgr::GetInstance().get(), &TcpMgr::sig_friend_apply, this,
+            &ChatDialog::slot_apply_friend);
 }
 
 ChatDialog::~ChatDialog() { delete ui; }
@@ -205,4 +211,20 @@ void ChatDialog::slot_text_changed(const QString &str) {
     } else {
         ShowSearch(false);
     }
+}
+
+void ChatDialog::slot_apply_friend(std::shared_ptr<AddFriendApply> apply) {
+    qDebug() << "receive apply friend slot, applyuid is " << apply->_from_uid
+             << " name is " << apply->_name << " desc is " << apply->_desc;
+
+    bool b_already = UserMgr::GetInstance()->AlreadyApply(apply->_from_uid);
+    if (b_already) {
+        return;
+    }
+
+    UserMgr::GetInstance()->addOrUpdateApply(
+        std::make_shared<ApplyInfo>(apply));
+    ui->side_contact_label->ShowReadPoint(true);
+    ui->con_user_list->ShowRedPoint(true);
+    ui->friend_apply_page->AddNewApply(apply);
 }

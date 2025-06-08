@@ -8,6 +8,7 @@
 
 #include "global.h"
 #include "statewidget.h"
+#include "userdata.h"
 
 namespace Ui {
 class ChatDialog;
@@ -39,6 +40,8 @@ class ChatDialog : public QDialog {
     void slot_side_chat();
     void slot_side_contact();
     void slot_text_changed(const QString &str);
+   public slots:
+    void slot_apply_friend(std::shared_ptr<AddFriendApply> apply);
 };
 
 #endif  // CHATDIALOG_H

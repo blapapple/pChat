@@ -4,11 +4,7 @@
 
 UserMgr::~UserMgr() {}
 
-void UserMgr::SetName(QString name) { _name = name; }
-
-void UserMgr::SetUid(int uid) { _uid = uid; }
-
-QString UserMgr::GetName() { return _name; }
+QString UserMgr::GetName() { return _user_info->_name; }
 
 void UserMgr::SetToken(QString token) { _token = token; }
 
@@ -16,7 +12,7 @@ void UserMgr::SetUserInfo(std::shared_ptr<UserInfo> user_info) {
     _user_info = user_info;
 }
 
-int UserMgr::GetUid() { return _uid; }
+int UserMgr::GetUid() { return _user_info->_uid; }
 
 std::list<std::shared_ptr<ApplyInfo> > UserMgr::GetApplyList() {
     return _apply_list;
@@ -62,6 +58,33 @@ void UserMgr::AppendApplyList(QJsonArray array) {
                                                 sex, status);
         _apply_list.emplace_back(info);
     }
+}
+
+bool UserMgr::CheckFriendById(int uid) {
+    auto iter = _friend_map.find(uid);
+    if (iter == _friend_map.end()) {
+        return false;
+    }
+    return true;
+}
+
+void UserMgr::AddFriend(std::shared_ptr<AuthRsp> auth_rsp) {
+    auto friend_info = std::make_shared<FriendInfo>(auth_rsp);
+    _friend_map[friend_info->_uid] = friend_info;
+}
+
+void UserMgr::AddFriend(std::shared_ptr<AuthInfo> auth_info) {
+    auto friend_info = std::make_shared<FriendInfo>(auth_info);
+    _friend_map[friend_info->_uid] = friend_info;
+}
+
+std::shared_ptr<FriendInfo> UserMgr::GetFriendById(int uid) {
+    auto iter = _friend_map.find(uid);
+    if (iter == _friend_map.end()) {
+        return nullptr;
+    }
+    // 迭代器并不是FriendInfo，需要取迭代器的值才是FriendInfo的指针
+    return *iter;
 }
 
 bool UserMgr::contains(int uid) const {

@@ -1,5 +1,6 @@
 #ifndef USERMGR_H
 #define USERMGR_H
+#include <QMap>
 #include <QObject>
 #include <list>
 #include <memory>
@@ -16,8 +17,6 @@ class UserMgr : public QObject,
    public:
     friend class Singleton<UserMgr>;
     ~UserMgr();
-    void SetName(QString name);
-    void SetUid(int uid);
     QString GetName();
     void SetToken(QString token);
     void SetUserInfo(std::shared_ptr<UserInfo> user_info);
@@ -28,16 +27,19 @@ class UserMgr : public QObject,
     void addOrUpdateApply(std::shared_ptr<ApplyInfo> apply_info);
     void removeApply(int uid);
     void AppendApplyList(QJsonArray array);
+    bool CheckFriendById(int uid);
+    void AddFriend(std::shared_ptr<AuthRsp> auth_rsp);
+    void AddFriend(std::shared_ptr<AuthInfo> auth_info);
+    std::shared_ptr<FriendInfo> GetFriendById(int uid);
 
    private:
     UserMgr();
-    QString _name;
     QString _token;
     std::shared_ptr<UserInfo> _user_info;
-    int _uid;
     std::list<std::shared_ptr<ApplyInfo>> _apply_list;
     std::unordered_map<int, std::list<std::shared_ptr<ApplyInfo>>::iterator>
         _apply_map;
+    QMap<int, std::shared_ptr<FriendInfo>> _friend_map;
 };
 
 #endif  // USERMGR_H

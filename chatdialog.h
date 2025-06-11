@@ -5,6 +5,9 @@
 
 #include <QDialog>
 #include <QList>
+#include <QListWidgetItem>
+#include <QMap>
+#include <unordered_map>
 
 #include "global.h"
 #include "statewidget.h"
@@ -35,6 +38,7 @@ class ChatDialog : public QDialog {
     ChatUIMode _state;
     bool _b_loading;
     QList<StateWidget *> _lb_list;
+    QMap<int, QListWidgetItem *> _chat_items_added;
    private slots:
     void slot_loading_chat_user();
     void slot_side_chat();
@@ -42,6 +46,8 @@ class ChatDialog : public QDialog {
     void slot_text_changed(const QString &str);
    public slots:
     void slot_apply_friend(std::shared_ptr<AddFriendApply> apply);
+    void slot_add_auth_friend(std::shared_ptr<AuthInfo> auth_info);
+    void slot_auth_rsp(std::shared_ptr<AuthRsp> auth_rsp);
 };
 
 #endif  // CHATDIALOG_H

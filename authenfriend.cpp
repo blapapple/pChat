@@ -16,7 +16,6 @@ AuthenFriend::AuthenFriend(QWidget* parent)
     setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
     this->setObjectName("AuthenFriend");
     this->setModal(true);
-    ui->name_ed->setPlaceholderText(tr("潘金金"));
     ui->label_ed->setPlaceholderText(tr("搜索、添加标签"));
     ui->back_ed->setPlaceholderText(tr("潘银银"));
 
@@ -118,7 +117,6 @@ void AuthenFriend::SetSearchInfo(std::shared_ptr<SearchInfo> si) {
     _si = si;
     auto applyname = UserMgr::GetInstance()->GetName();
     auto bakname = si->_name;
-    ui->name_ed->setText(applyname);
     ui->back_ed->setText(bakname);
 }
 

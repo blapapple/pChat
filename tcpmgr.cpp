@@ -271,7 +271,7 @@ void TcpMgr::initHandlers() {
                              int from_uid = jsonObj["applyuid"].toInt();
                              QString name = jsonObj["name"].toString();
                              QString nick = jsonObj["nick"].toString();
-                             QString desc = jsonObj["icon"].toString();
+                             QString desc = jsonObj["desc"].toString();
                              QString icon = jsonObj["icon"].toString();
                              int sex = jsonObj["sex"].toInt();
 
@@ -284,6 +284,45 @@ void TcpMgr::initHandlers() {
                          [this](int err) {
                              qDebug()
                                  << "ID_NOTIFY_ADD_FRIEND_REQ Error: " << err;
+                         }));
+
+    _handlers.insert(ID_NOTIFY_AUTH_FRIEND_REQ,
+                     MakeJsonHandler(
+                         [this](const QJsonObject& jsonObj, ReqId id) {
+                             int from_uid = jsonObj["fromuid"].toInt();
+                             QString name = jsonObj["name"].toString();
+                             QString nick = jsonObj["nick"].toString();
+                             QString icon = jsonObj["icon"].toString();
+                             int sex = jsonObj["sex"].toInt();
+
+                             auto apply_info = std::make_shared<AuthInfo>(
+                                 from_uid, name, nick, icon, sex);
+                             emit sig_add_auth_friend(apply_info);
+
+                             qDebug() << "ID_NOTIFY_AUTH_FRIEND_REQ Success ";
+                         },
+                         [this](int err) {
+                             qDebug()
+                                 << "ID_NOTIFY_AUTH_FRIEND_REQ Error: " << err;
+                         }));
+
+    _handlers.insert(ID_AUTH_FRIEND_RSP,
+                     MakeJsonHandler(
+                         [this](const QJsonObject& jsonObj, ReqId id) {
+                             int uid = jsonObj["uid"].toInt();
+                             QString name = jsonObj["name"].toString();
+                             QString nick = jsonObj["nick"].toString();
+                             QString icon = jsonObj["icon"].toString();
+                             int sex = jsonObj["sex"].toInt();
+
+                             auto rsp = std::make_shared<AuthRsp>(
+                                 uid, name, nick, icon, sex);
+                             emit sig_auth_rsp(rsp);
+
+                             qDebug() << "ID_AUTH_FRIEND_RSP Success ";
+                         },
+                         [this](int err) {
+                             qDebug() << "ID_AUTH_FRIEND_RSP Error: " << err;
                          }));
 }
 

@@ -37,6 +37,7 @@ class ContactUserList : public QListWidget {
    private:
     ConUserItem *_add_friend_item;
     QListWidgetItem *_groupitem;
+    bool _load_pending;  // 是否正在加载
 };
 
 #endif  // CONTACTUSERLIST_H

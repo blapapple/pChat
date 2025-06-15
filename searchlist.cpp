@@ -9,6 +9,7 @@
 #include "findsuccessdlg.h"
 #include "tcpmgr.h"
 #include "userdata.h"
+#include "usermgr.h"
 
 SearchList::SearchList(QWidget *parent)
     : QListWidget(parent),
@@ -148,8 +149,16 @@ void SearchList::slot_user_search(std::shared_ptr<SearchInfo> si) {
     if (si == nullptr) {
         _find_dlg = std::make_shared<FindFailDlg>(this);
     } else {
-        // todo
-        // 搜到已经是好友，或者未添加好友
+        auto self_uid = UserMgr::GetInstance()->GetUid();
+        if (si->_uid == self_uid) {
+            return;  // 不允许搜索自己
+        }
+        // 分两种情况，一种是收到已经是好友，一种是未添加好友
+        bool bExist = UserMgr::GetInstance()->CheckFriendById(si->_uid);
+        if (bExist) {
+            emit sig_jump_chat_item(si);
+            return;
+        }
         _find_dlg = std::make_shared<FindSuccessDlg>(this);
         std::dynamic_pointer_cast<FindSuccessDlg>(_find_dlg)->SetSearchInfo(si);
     }

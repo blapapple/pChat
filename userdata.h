@@ -27,7 +27,7 @@ class AddFriendApply {
     int _sex;
 };
 
-struct ApplyInfo {
+struct ApplyInfo {  // 这里的uid是申请方的uid
     ApplyInfo(int uid, QString name, QString desc, QString icon, QString nick,
               int sex, int status)
         : _uid(uid),
@@ -56,7 +56,7 @@ struct ApplyInfo {
     int _status;
 };
 
-struct AuthInfo {
+struct AuthInfo {  // 这里的uid是认证方的uid
     AuthInfo(int uid, QString name, QString nick, QString icon, int sex)
         : _uid(uid), _name(name), _nick(nick), _icon(icon), _sex(sex) {}
     int _uid;

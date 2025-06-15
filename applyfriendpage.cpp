@@ -25,12 +25,11 @@ ApplyFriendPage::~ApplyFriendPage() { delete ui; }
 
 void ApplyFriendPage::AddNewApply(std::shared_ptr<AddFriendApply> apply) {
     // 先模拟头像随机，以后头像资源增加资源服务器后再显示
-    int randomValue =
-        QRandomGenerator::global()->bounded(100);  // 生成0到99之间的随机整数
-    int head_i = randomValue % heads.size();
+    // int randomValue =
+    //     QRandomGenerator::global()->bounded(100);  // 生成0到99之间的随机整数
     auto *apply_item = new ApplyFriendItem();
     auto apply_info = std::make_shared<ApplyInfo>(
-        apply->_from_uid, apply->_name, apply->_desc, heads[head_i],
+        apply->_from_uid, apply->_name, apply->_desc, apply->_icon,
         apply->_name, 0, 0);
     apply_item->SetInfo(apply_info);
     QListWidgetItem *item = new QListWidgetItem;
@@ -39,6 +38,8 @@ void ApplyFriendPage::AddNewApply(std::shared_ptr<AddFriendApply> apply) {
     item->setFlags(item->flags() & ~Qt::ItemIsEnabled & ~Qt::ItemIsSelectable);
     ui->apply_friend_list->insertItem(0, item);
     ui->apply_friend_list->setItemWidget(item, apply_item);
+    //  添加到未审核列表中
+    _unauth_items[apply->_from_uid] = apply_item;
     apply_item->ShowAddBtn(true);
     // 收到审核好友信号
     connect(apply_item, &ApplyFriendItem::sig_auth_friend,
@@ -57,7 +58,9 @@ void ApplyFriendPage::paintEvent(QPaintEvent *event) {
 }
 void ApplyFriendPage::loadApplyList() {
     // 添加好友申请
-    auto apply_list = UserMgr::GetInstance()->GetApplyList();
+    auto apply_list =
+        UserMgr::GetInstance()
+            ->GetApplyList();  // 这里的list在主程序初始化时就已经从数据库读入了
     for (auto &apply : apply_list) {
         int randomValue = QRandomGenerator::global()->bounded(
             100);  // 生成0到99之间的随机整数
@@ -79,7 +82,7 @@ void ApplyFriendPage::loadApplyList() {
             auto uid = apply_item->GetUid();
             _unauth_items[uid] = apply_item;
         }
-        // 收到审核好友信号
+        // 收到按下添加按钮后，弹出认证窗口
         connect(apply_item, &ApplyFriendItem::sig_auth_friend,
                 [this](std::shared_ptr<ApplyInfo> apply_info) {
                     auto *authFriend = new AuthenFriend(this);

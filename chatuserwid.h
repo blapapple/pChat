@@ -19,6 +19,7 @@ class ChatUserWid : public ListItemBase {
 
     QSize sizeHint() const override;
     void SetInfo(std::shared_ptr<UserInfo> user_info);
+    std::shared_ptr<UserInfo> GetUserInfo() const;
 
    private:
     Ui::ChatUserWid *ui;

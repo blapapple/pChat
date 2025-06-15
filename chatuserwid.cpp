@@ -26,3 +26,7 @@ void ChatUserWid::SetInfo(std::shared_ptr<UserInfo> user_info) {
     ui->user_chat_label->setText(_user_info->_last_msg);
     ui->time_label->setText(QTime::currentTime().toString("hh:mm"));
 }
+
+std::shared_ptr<UserInfo> ChatUserWid::GetUserInfo() const {
+    return _user_info;
+}

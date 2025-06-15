@@ -149,6 +149,7 @@ void TcpMgr::initHandlers() {
         };
     };
 
+    // 点击登录后服务器的回复
     _handlers.insert(ID_CHAT_LOGIN_RSP, [this](ReqId id, int len,
                                                QByteArray data) {
         Q_UNUSED(len);
@@ -188,14 +189,21 @@ void TcpMgr::initHandlers() {
         UserMgr::GetInstance()->SetUserInfo(user_info);
         UserMgr::GetInstance()->SetToken(jsonObj["token"].toString());
 
+        // 添加申请列表
         if (jsonObj.contains("apply_list")) {
             UserMgr::GetInstance()->AppendApplyList(
                 jsonObj["apply_list"].toArray());
+        }
+        // 添加好友列表
+        if (jsonObj.contains("friend_list")) {
+            UserMgr::GetInstance()->AppendFriendList(
+                jsonObj["friend_list"].toArray());
         }
 
         emit sig_switch_chatdlg();
     });
 
+    // 点击搜索后服务器的回复
     _handlers.insert(ID_SEARCH_USER_RSP, [this](ReqId id, int len,
                                                 QByteArray data) {
         Q_UNUSED(len);
@@ -235,6 +243,7 @@ void TcpMgr::initHandlers() {
         emit sig_user_search(search_info);
     });
 
+    // 点击申请好友后服务器的回复
     _handlers.insert(
         ID_ADD_FRIEND_RSP, [this](ReqId id, int len, QByteArray data) {
             Q_UNUSED(len);
@@ -265,6 +274,7 @@ void TcpMgr::initHandlers() {
             qDebug() << "Add Friend RSP Success ";
         });
 
+    // 被通知有其他客户端传来的好友申请
     _handlers.insert(ID_NOTIFY_ADD_FRIEND_REQ,
                      MakeJsonHandler(
                          [this](const QJsonObject& jsonObj, ReqId id) {
@@ -286,6 +296,7 @@ void TcpMgr::initHandlers() {
                                  << "ID_NOTIFY_ADD_FRIEND_REQ Error: " << err;
                          }));
 
+    // 被添加方处理好友请求后，服务器给添加方的回复
     _handlers.insert(ID_NOTIFY_AUTH_FRIEND_REQ,
                      MakeJsonHandler(
                          [this](const QJsonObject& jsonObj, ReqId id) {
@@ -306,6 +317,7 @@ void TcpMgr::initHandlers() {
                                  << "ID_NOTIFY_AUTH_FRIEND_REQ Error: " << err;
                          }));
 
+    // 被添加方处理好友认证后的回复
     _handlers.insert(ID_AUTH_FRIEND_RSP,
                      MakeJsonHandler(
                          [this](const QJsonObject& jsonObj, ReqId id) {

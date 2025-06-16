@@ -2,7 +2,7 @@
 
 #include "ui_chatuserwid.h"
 
-ChatUserWid::ChatUserWid(QWidget *parent)
+ChatUserWid::ChatUserWid(QWidget* parent)
     : ListItemBase(parent), ui(new Ui::ChatUserWid) {
     ui->setupUi(this);
     SetItemType(ListItemType::CHAT_USER_ITEM);
@@ -29,4 +29,16 @@ void ChatUserWid::SetInfo(std::shared_ptr<UserInfo> user_info) {
 
 std::shared_ptr<UserInfo> ChatUserWid::GetUserInfo() const {
     return _user_info;
+}
+
+void ChatUserWid::updateLastMsg(
+    std::vector<std::shared_ptr<TextChatData> > msgs) {
+    QString last_msg = "";
+    for (auto& msg : msgs) {
+        last_msg = msg->_msg_content;
+        _user_info->_chat_msgs.emplace_back(msg);
+    }
+
+    _user_info->_last_msg = last_msg;
+    ui->user_chat_label->setText(_user_info->_last_msg);
 }

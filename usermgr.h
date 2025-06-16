@@ -39,6 +39,9 @@ class UserMgr : public QObject,
     std::vector<std::shared_ptr<FriendInfo>> GetConListPerPage();
     void UpdateContactLoadedCount();
     bool IsLoadConFin();
+    std::shared_ptr<UserInfo> GetUserInfo();
+    void AppendFriendChatMsg(int friend_id,
+                             std::vector<std::shared_ptr<TextChatData>>);
 
    private:
     UserMgr();

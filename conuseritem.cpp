@@ -16,7 +16,7 @@ QSize ConUserItem::sizeHint() const {
     return QSize(250, 55);  // 返回自定义的尺寸
 }
 void ConUserItem::SetInfo(std::shared_ptr<AuthInfo> auth_info) {
-    _info = std::make_shared<UserInfo>(auth_info);
+    _info = std::make_shared<FriendInfo>(auth_info);
     // 加载图片
     QPixmap pixmap(_info->_icon);
     // 设置图片自动缩放
@@ -26,7 +26,7 @@ void ConUserItem::SetInfo(std::shared_ptr<AuthInfo> auth_info) {
     ui->user_name_lb->setText(_info->_name);
 }
 void ConUserItem::SetInfo(int uid, QString name, QString icon) {
-    _info = std::make_shared<UserInfo>(uid, name, icon);
+    _info = std::make_shared<FriendInfo>(uid, name, icon);
     // 加载图片
     QPixmap pixmap(_info->_icon);
     // 设置图片自动缩放
@@ -36,7 +36,7 @@ void ConUserItem::SetInfo(int uid, QString name, QString icon) {
     ui->user_name_lb->setText(_info->_name);
 }
 void ConUserItem::SetInfo(std::shared_ptr<AuthRsp> auth_rsp) {
-    _info = std::make_shared<UserInfo>(auth_rsp);
+    _info = std::make_shared<FriendInfo>(auth_rsp);
     // 加载图片
     QPixmap pixmap(_info->_icon);
     // 设置图片自动缩放
@@ -52,3 +52,5 @@ void ConUserItem::ShowRedPoint(bool show) {
         ui->red_point->hide();
     }
 }
+
+std::shared_ptr<FriendInfo> ConUserItem::GetInfo() { return _info; }

@@ -1,7 +1,9 @@
 #ifndef USERDATA_H
 #define USERDATA_H
 
+#include <QJsonArray>
 #include <QObject>
+#include <vector>
 
 class SearchInfo {
    public:
@@ -81,6 +83,8 @@ struct AuthRsp {
     QString _icon;
     int _sex;
 };
+
+class TextChatData;
 struct FriendInfo {
     FriendInfo(int uid, QString name, QString nick, QString icon, int sex,
                QString desc = "", QString back = "", QString last_msg = "")
@@ -119,23 +123,8 @@ struct FriendInfo {
           _sex(auth->_sex),
           _last_msg("") {}
 
-    // UserInfo(std::shared_ptr<SearchInfo> search_info)
-    //     : _uid(search_info->_uid),
-    //       _name(search_info->_name),
-    //       _nick(search_info->_nick),
-    //       _icon(search_info->_icon),
-    //       _sex(search_info->_sex),
-    //       _last_msg("") {}
-
-    // UserInfo(std::shared_ptr<FriendInfo> friend_info)
-    //     : _uid(friend_info->_uid),
-    //       _name(friend_info->_name),
-    //       _nick(friend_info->_nick),
-    //       _icon(friend_info->_icon),
-    //       _sex(friend_info->_sex),
-    //       _last_msg("") {
-    //     _chat_msgs = friend_info->_chat_msgs;
-    // }
+    void AppendChatMsgs(
+        const std::vector<std::shared_ptr<TextChatData>> text_vec);
 
     int _uid;
     QString _name;
@@ -145,9 +134,10 @@ struct FriendInfo {
     QString _desc;
     QString _back;
     QString _last_msg;
-    // std::vector<std::shared_ptr<TextChatData>> _chat_msgs;
+    std::vector<std::shared_ptr<TextChatData>> _chat_msgs;
 };
 
+class TextChatData;
 struct UserInfo {
     UserInfo(int uid, QString name, QString nick, QString icon, int sex = 0,
              QString last_msg = "", QString desc = "")
@@ -203,7 +193,7 @@ struct UserInfo {
           _sex(friend_info->_sex),
           _last_msg(""),
           _desc("") {
-        // _chat_msgs = friend_info->_chat_msgs;
+        _chat_msgs = friend_info->_chat_msgs;
     }
 
     int _uid;
@@ -213,7 +203,26 @@ struct UserInfo {
     int _sex;
     QString _desc;
     QString _last_msg;  // 聊天框显示最后一条聊天信息
-    // std::vector<std::shared_ptr<TextChatData>> _chat_msgs;
+    std::vector<std::shared_ptr<TextChatData>> _chat_msgs;
+};
+
+struct TextChatData {
+    TextChatData(QString msg_id, QString msg_content, int fromuid, int touid)
+        : _msg_id(msg_id),
+          _msg_content(msg_content),
+          _from_uid(fromuid),
+          _to_uid(touid) {}
+    QString _msg_id;
+    QString _msg_content;
+    int _from_uid;
+    int _to_uid;
+};
+
+struct TextChatMsg {
+    TextChatMsg(int fromuid, int touid, QJsonArray arrays);
+    int _to_uid;
+    int _from_uid;
+    std::vector<std::shared_ptr<TextChatData>> _chat_msgs;
 };
 
 #endif  // USERDATA_H

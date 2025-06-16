@@ -101,6 +101,7 @@ const int MIN_APPLY_LABEL_ED_LEN = 40;
 const QString add_prefix = "添加标签 ";
 const int tip_offset = 5;
 const int CHAT_COUNT_PER_PAGE = 13;
+const int MAX_CHAT_TXT_LENGTH = 1024;
 
 // 作测试用数据
 

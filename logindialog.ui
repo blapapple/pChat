@@ -62,7 +62,7 @@
      <item>
       <widget class="QLabel" name="err_tip">
        <property name="text">
-        <string>TextLabel</string>
+        <string/>
        </property>
       </widget>
      </item>

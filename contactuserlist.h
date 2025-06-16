@@ -32,7 +32,7 @@ class ContactUserList : public QListWidget {
    signals:
     void sig_loading_contact_user();
     void sig_switch_apply_friend_page();
-    void sig_switch_friend_info_page();
+    void sig_switch_friend_info_page(std::shared_ptr<FriendInfo> user_info);
 
    private:
     ConUserItem *_add_friend_item;
